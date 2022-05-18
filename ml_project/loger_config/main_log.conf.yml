@@ -1,0 +1,37 @@
+version: 1
+formatters:
+    main_app_format:
+        class: logging.Formatter
+        format: "%(asctime)s %(name)s %(levelname)s %(message)s"
+        datefmt: "%Y-%m-%d %H:%M:%S"
+handlers:
+    debug_handler:
+        class: logging.FileHandler
+        filename: ./loger_output/debug_global_log.debug.log
+        formatter: main_app_format
+        level: DEBUG
+    debug_main_app_handler:
+        class: logging.FileHandler
+        filename: ./loger_output/main_app_log.debug.log
+        formatter: main_app_format
+        level: DEBUG
+    warn_main_app_handler:
+        class: logging.FileHandler
+        filename: ./loger_output/main_app_log.warn.log
+        formatter: main_app_format
+        level: WARN
+    info_main_app_handler:
+        #class: logging.StreamHandler
+        class: logging.FileHandler
+        #stream: ext://sys.stderr
+        filename: ./loger_output/main_app_log.info.log
+        formatter: main_app_format
+        level: INFO
+loggers:
+    main_app:
+        level: DEBUG
+        handlers: [debug_main_app_handler, warn_main_app_handler, info_main_app_handler]
+root:
+    level: DEBUG
+    #handlers: [debug_db_handler, warn_db_handler, info_db_handler]
+    handlers: [debug_handler]
